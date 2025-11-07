@@ -83,7 +83,6 @@
     background-color: #f7c5c5;
     border-color: #e74c3c;
   }
-  .hidden { display: none; }
   button {
     margin-top: 20px;
     padding: 12px 20px;
@@ -99,9 +98,26 @@
   #validate-btn:hover {
     background-color: #009e4d;
   }
-  #stop-btn {
+  #next-btn, .blue-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  #next-btn:hover, .blue-btn:hover {
+    background-color: #3399ff;
+  }
+  #stop-btn, .red-btn {
     background-color: #e74c3c;
     color: white;
+  }
+  #stop-btn:hover {
+    background-color: #ff6b5a;
+  }
+  #home-btn {
+    background-color: #007a3d;
+    color: white;
+  }
+  #home-btn:hover {
+    background-color: #009e4d;
   }
   #progress {
     font-weight: bold;
@@ -139,6 +155,7 @@
   <div id="question-container"></div>
   <div id="feedback"></div>
   <button id="validate-btn">Valider</button>
+  <button id="next-btn" style="display:none;">Question suivante</button>
   <button id="stop-btn">Arrêter le quiz</button>
   <div id="result"></div>
 </div>
@@ -150,10 +167,12 @@ let score = 0;
 let category = "";
 let totalQuestions = 30;
 let minScore = 15;
+let currentFile = "";
 
 document.querySelectorAll(".category-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const file = btn.dataset.file;
+    currentFile = file;
     category = btn.dataset.title;
     document.getElementById("category-title").textContent = category;
     document.getElementById("home").style.display = "none";
@@ -203,31 +222,26 @@ function showQuestion() {
   });
   container.appendChild(opts);
   document.getElementById("feedback").textContent = "";
+  document.getElementById("validate-btn").style.display = "inline-block";
+  document.getElementById("next-btn").style.display = "none";
 }
 
 document.getElementById("validate-btn").addEventListener("click", () => {
-  // Récupère les indices sélectionnés
   const allOptions = Array.from(document.querySelectorAll(".option"));
   const selectedIdx = allOptions.map((opt, i) => opt.classList.contains("selected") ? i : -1).filter(i => i !== -1);
   if (selectedIdx.length === 0) return alert("Veuillez sélectionner au moins une réponse.");
 
   const q = questions[currentIndex];
   const correctIndexes = Array.isArray(q.answers) ? q.answers.slice() : [];
-  // comparer les ensembles (mêmes éléments, même taille)
   const a = selectedIdx.slice().sort((x,y)=>x-y);
   const b = correctIndexes.slice().sort((x,y)=>x-y);
   const arraysEqual = (x,y) => x.length===y.length && x.every((v,i)=>v===y[i]);
   const isExact = arraysEqual(a,b);
 
-  // Affichage des corrections
   allOptions.forEach((opt, i) => {
     opt.style.pointerEvents = 'none';
-    if (correctIndexes.includes(i)) {
-      opt.classList.add("correct");
-    }
-    if (opt.classList.contains("selected") && !correctIndexes.includes(i)) {
-      opt.classList.add("incorrect");
-    }
+    if (correctIndexes.includes(i)) opt.classList.add("correct");
+    if (opt.classList.contains("selected") && !correctIndexes.includes(i)) opt.classList.add("incorrect");
   });
 
   if (isExact) {
@@ -239,11 +253,14 @@ document.getElementById("validate-btn").addEventListener("click", () => {
     document.getElementById("feedback").style.color = "#e74c3c";
   }
 
-  setTimeout(() => {
-    currentIndex++;
-    if (currentIndex < totalQuestions) showQuestion();
-    else showResult();
-  }, 1200);
+  document.getElementById("validate-btn").style.display = "none";
+  document.getElementById("next-btn").style.display = "inline-block";
+});
+
+document.getElementById("next-btn").addEventListener("click", () => {
+  currentIndex++;
+  if (currentIndex < totalQuestions) showQuestion();
+  else showResult();
 });
 
 document.getElementById("stop-btn").addEventListener("click", showResult);
@@ -251,6 +268,7 @@ document.getElementById("stop-btn").addEventListener("click", showResult);
 function showResult() {
   document.getElementById("question-container").innerHTML = "";
   document.getElementById("validate-btn").style.display = "none";
+  document.getElementById("next-btn").style.display = "none";
   document.getElementById("stop-btn").style.display = "none";
   document.getElementById("feedback").textContent = "";
 
@@ -258,13 +276,20 @@ function showResult() {
   const resultText = `Score : ${score} / ${totalQuestions}<br>${success ? "🎉 Réussi !" : "❌ Non validé"}`;
   document.getElementById("result").innerHTML = resultText;
 
-  const restartBtn = document.createElement("button");
-  restartBtn.textContent = "Recommencer";
-  restartBtn.style.backgroundColor = "#007a3d";
-  restartBtn.style.color = "white";
-  restartBtn.onclick = () => location.reload();
+  const newQuizBtn = document.createElement("button");
+  newQuizBtn.textContent = "🔁 Nouveau quiz";
+  newQuizBtn.className = "blue-btn";
+  newQuizBtn.onclick = () => loadQuestions(currentFile);
+
+  const homeBtn = document.createElement("button");
+  homeBtn.textContent = "🏠 Accueil";
+  homeBtn.id = "home-btn";
+  homeBtn.onclick = () => location.reload();
+
   document.getElementById("result").appendChild(document.createElement("br"));
-  document.getElementById("result").appendChild(restartBtn);
+  document.getElementById("result").appendChild(newQuizBtn);
+  document.getElementById("result").appendChild(document.createTextNode(" "));
+  document.getElementById("result").appendChild(homeBtn);
 }
 </script>
 </body>
