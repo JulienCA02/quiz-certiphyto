@@ -206,24 +206,31 @@ function showQuestion() {
 }
 
 document.getElementById("validate-btn").addEventListener("click", () => {
-  const selected = Array.from(document.querySelectorAll(".option.selected"));
-  if (selected.length === 0) return alert("Veuillez sélectionner au moins une réponse.");
+  // Récupère les indices sélectionnés
+  const allOptions = Array.from(document.querySelectorAll(".option"));
+  const selectedIdx = allOptions.map((opt, i) => opt.classList.contains("selected") ? i : -1).filter(i => i !== -1);
+  if (selectedIdx.length === 0) return alert("Veuillez sélectionner au moins une réponse.");
 
   const q = questions[currentIndex];
-  const correctIndexes = q.answers;
-  let correct = true;
+  const correctIndexes = Array.isArray(q.answers) ? q.answers.slice() : [];
+  // comparer les ensembles (mêmes éléments, même taille)
+  const a = selectedIdx.slice().sort((x,y)=>x-y);
+  const b = correctIndexes.slice().sort((x,y)=>x-y);
+  const arraysEqual = (x,y) => x.length===y.length && x.every((v,i)=>v===y[i]);
+  const isExact = arraysEqual(a,b);
 
-  document.querySelectorAll(".option").forEach((opt, i) => {
+  // Affichage des corrections
+  allOptions.forEach((opt, i) => {
+    opt.style.pointerEvents = 'none';
     if (correctIndexes.includes(i)) {
       opt.classList.add("correct");
-    } else if (opt.classList.contains("selected")) {
-      opt.classList.add("incorrect");
-      correct = false;
     }
-    opt.style.pointerEvents = "none";
+    if (opt.classList.contains("selected") && !correctIndexes.includes(i)) {
+      opt.classList.add("incorrect");
+    }
   });
 
-  if (correct) {
+  if (isExact) {
     score++;
     document.getElementById("feedback").textContent = "✅ Bonne réponse !";
     document.getElementById("feedback").style.color = "#2ecc71";
