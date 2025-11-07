@@ -1,6 +1,6 @@
 # Quiz d'entraînement Certiphyto DENSA
 
-Ce dépôt contient un quiz interactif d'entraînement au **Certiphyto (version DENSA)**.  
+Ce dépôt contient un quiz interactif d'entraînement au **Certiphyto (version DENSA - Exploitation agricole)**.  
 Il permet de s’exercer à partir d’un pool de questions aléatoires et d’obtenir un score en fin de test.
 
 ---
