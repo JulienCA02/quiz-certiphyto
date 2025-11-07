@@ -7,7 +7,7 @@ Il permet de s’exercer à partir d’un pool de questions aléatoires et d’o
 
 ## Fonctionnement
 
-- questions disponibles dans le fichier ( en cours d’enrichissement) `questions.json`
+- 60 questions disponibles dans le fichier ( en cours d’enrichissement) `questions.json`
 - 30 questions sont tirées **aléatoirement** à chaque session
 - Le quiz est **réussi à partir de 15 bonnes réponses**
 - Les questions peuvent avoir **plusieurs bonnes réponses**
@@ -19,21 +19,3 @@ Il permet de s’exercer à partir d’un pool de questions aléatoires et d’o
 
 Le quiz est accessible en ligne via GitHub Pages :
 [https://julienca02.github.io/quizz-certiphyto-densa/](https://julienca02.github.io/quizz-certiphyto-densa/)
-
-Pour l’utiliser localement :
-1. Télécharger les fichiers `index.html` et `questions.json`
-2. Les placer dans le même dossier
-3. Ouvrir `index.html` dans un navigateur web
-
----
-
-## Structure du fichier `questions.json`
-
-Chaque question a la forme suivante :
-
-```json
-{
-  "q": "Texte de la question",
-  "options": ["Réponse 1", "Réponse 2", "Réponse 3"],
-  "answers": [0, 2]
-}
