@@ -3757,9 +3757,8 @@
   },
   {
     "id": 301,
-    "q": "Vous devez réaliser un mélange de deux produits phytopharmaceutiques, quelles questions devez-vous vous poser afin de savoir si ce mélange",
+    "q": "Vous devez réaliser un mélange de deux produits phytopharmaceutiques, quelles questions devez-vous vous poser afin de savoir si ce mélange est autorisé ?",
     "options": [
-      "est autorisé ?",
       "Est-ce que l'un des produits est classé Cancérigène, Mutagène ou Reprotoxique (CMR) ?",
       "Est-ce que les deux produits ont le même mode d'action ?",
       "Est-ce que l'un des produits a une Zone Non Traitée (ZNT) de 50 mètres ?"
@@ -3835,4 +3834,5 @@
       0
     ]
   }
+
 ]
