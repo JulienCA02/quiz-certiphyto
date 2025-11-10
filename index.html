@@ -1,121 +1,337 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz d'entraînement Certiphyto</title>
-<style>
-  body {font-family: Arial, sans-serif;background-color: #f4f7f9;color: #333;text-align: center;margin: 0;padding: 0;}
-  header {background: #005a2b;color: white;padding: 15px 10px;display: flex;align-items: center;justify-content: center;gap: 10px;}
-  header img {height: 60px;}
-  h1 {margin: 10px 0;}
-  .category-btn {display: block;margin: 15px auto;padding: 15px 25px;width: 320px;font-size: 16px;background: #007a3d;color: white;border: none;border-radius: 10px;cursor: pointer;transition: background 0.3s, transform 0.2s;}
-  .category-btn:hover {background: #00a650;transform: scale(1.03);}
-  #quiz-container {display: none;margin-top: 20px;max-width: 700px;margin-left: auto;margin-right: auto;}
-  .question {font-size: 20px;margin-bottom: 15px;}
-  .options {text-align: left;}
-  .option {background: #fff;border: 2px solid #ddd;padding: 10px;border-radius: 8px;margin: 8px 0;cursor: pointer;transition: all 0.3s;}
-  .option:hover {background: #f0f0f0;}
-  .option.selected {background-color: #cce5ff;border-color: #007bff;}
-  .option.correct {background-color: #c8f7c5;border-color: #2ecc71;}
-  .option.incorrect {background-color: #f7c5c5;border-color: #e74c3c;}
-  button {margin-top: 20px;padding: 12px 20px;font-size: 16px;border: none;border-radius: 8px;cursor: pointer;}
-  #validate-btn {background-color: #007a3d;color: white;}
-  #validate-btn:hover {background-color: #009e4d;}
-  #next-btn, .blue-btn {background-color: #007bff;color: white;}
-  #next-btn:hover, .blue-btn:hover {background-color: #3399ff;}
-  #stop-btn, .red-btn {background-color: #e74c3c;color: white;}
-  #stop-btn:hover {background-color: #ff6b5a;}
-  #home-btn {background-color: #007a3d;color: white;}
-  #home-btn:hover {background-color: #009e4d;}
-  #progress {font-weight: bold;margin: 10px 0;}
-  #result {font-size: 22px;font-weight: bold;}
-  #feedback {font-size: 18px;font-weight: bold;margin-top: 10px;}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz d'entraînement Certiphyto</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f7f9fb;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: #005a9e;
+      margin: 0;
+    }
+
+    main {
+      margin: 20px auto;
+      max-width: 800px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-btn {
+      display: block;
+      margin: 10px auto;
+      padding: 14px 20px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      border: none;
+      width: 90%;
+      max-width: 450px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .category-btn.ready {
+      background-color: #0078d7;
+      color: white;
+    }
+
+    .category-btn.ready:hover {
+      background-color: #005a9e;
+    }
+
+    .category-btn.pending {
+      background-color: #f3f3f3;
+      color: #888;
+      border: 1px solid #ccc;
+      cursor: not-allowed;
+    }
+
+    #quiz-container {
+      display: none;
+      text-align: left;
+    }
+
+    #question {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .option {
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .option:hover {
+      background-color: #eef6ff;
+    }
+
+    .selected {
+      background-color: #d0e7ff;
+      border-color: #0078d7;
+    }
+
+    .correct {
+      background-color: #c9f7c5 !important;
+      border-color: #3da33d !important;
+    }
+
+    .incorrect {
+      background-color: #ffc7c7 !important;
+      border-color: #cc0000 !important;
+    }
+
+    .btn {
+      margin: 15px 5px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #validate-btn {
+      background-color: #0078d7;
+      color: white;
+    }
+
+    #validate-btn:hover {
+      background-color: #005a9e;
+    }
+
+    #next-btn {
+      background-color: #00a86b;
+      color: white;
+    }
+
+    #next-btn:hover {
+      background-color: #008b57;
+    }
+
+    #stop-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    #stop-btn:hover {
+      background-color: #b02a37;
+    }
+
+    #restart-btn, #home-btn {
+      background-color: #0078d7;
+      color: white;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-<header><img src="logo.png" alt="Logo"><h1>Quiz d'entraînement Certiphyto</h1></header>
-<div id="home">
-  <h2>Choisissez votre catégorie :</h2>
-  <button class="category-btn" data-file="questions-densa-ea.json" data-title="Décideur en entreprise non soumise à agrément - Exploitation agricole">DENSA<br><small>Décideur en entreprise non soumise à agrément - Exploitation agricole</small></button>
-  <button class="category-btn" data-file="questions-densa-col.json" data-title="Décideur en entreprise non soumise à agrément - Collectivité">DENSA<br><small>Décideur en entreprise non soumise à agrément - Collectivité</small></button>
-  <button class="category-btn" data-file="questions-desa.json" data-title="Décideur en entreprise soumise à agrément - Prestation de services du secteur agricole et forestier">DESA<br><small>Décideur en entreprise soumise à agrément - Prestation de services du secteur agricole et forestier</small></button>
-  <button class="category-btn" data-file="questions-operateur-ea.json" data-title="Opérateur - Exploitation agricole">OPÉRATEUR<br><small>Exploitation agricole</small></button>
-  <button class="category-btn" data-file="questions-operateur-col.json" data-title="Opérateur - Collectivité">OPÉRATEUR<br><small>Collectivité</small></button>
-</div>
-<div id="quiz-container">
-  <h2 id="category-title"></h2>
-  <div id="progress"></div>
-  <div id="question-container"></div>
-  <div id="feedback"></div>
-  <button id="validate-btn">Valider</button>
-  <button id="next-btn" style="display:none;">Question suivante</button>
-  <button id="stop-btn">Arrêter le quiz</button>
-  <div id="result"></div>
-</div>
-<script>
-let questions=[],currentIndex=0,score=0,category="",totalQuestions=30,minScore=15,currentFile="";
-document.querySelectorAll(".category-btn").forEach(btn=>{btn.addEventListener("click",()=>{const file=btn.dataset.file;currentFile=file;category=btn.dataset.title;document.getElementById("category-title").textContent=category;document.getElementById("home").style.display="none";document.getElementById("quiz-container").style.display="block";loadQuestions(file);});});
-async function loadQuestions(file){
-  try{
-    document.getElementById("result").innerHTML="";
-    document.getElementById("feedback").textContent="";
-    document.getElementById("validate-btn").style.display="inline-block";
-    document.getElementById("next-btn").style.display="none";
-    document.getElementById("stop-btn").style.display="inline-block";
-    const response=await fetch(file+"?v="+Date.now());
-    questions=await response.json();
-    if(file.includes("operateur")){totalQuestions=20;minScore=12;}
-    else if(file.includes("desa")){totalQuestions=30;minScore=20;}
-    else{totalQuestions=30;minScore=15;}
-    questions=questions.sort(()=>0.5-Math.random()).slice(0,totalQuestions);
-    currentIndex=0;score=0;showQuestion();
-  }catch(e){alert("Erreur de chargement des questions : "+e);}
-}
-function showQuestion(){
-  const q=questions[currentIndex];
-  document.getElementById("progress").textContent=`Question ${currentIndex+1} / ${totalQuestions}`;
-  const c=document.getElementById("question-container");
-  c.innerHTML=`<div class='question'>${q.q}</div>`;
-  const opts=document.createElement("div");opts.classList.add("options");
-  q.options.forEach((opt,i)=>{const d=document.createElement("div");d.classList.add("option");d.textContent=opt;d.addEventListener("click",()=>d.classList.toggle("selected"));opts.appendChild(d);});
-  c.appendChild(opts);
-  document.getElementById("feedback").textContent="";
-  document.getElementById("validate-btn").style.display="inline-block";
-  document.getElementById("next-btn").style.display="none";
-}
-document.getElementById("validate-btn").addEventListener("click",()=>{
-  const allOpt=Array.from(document.querySelectorAll(".option"));
-  const sel=allOpt.map((o,i)=>o.classList.contains("selected")?i:-1).filter(i=>i!==-1);
-  if(sel.length===0)return alert("Veuillez sélectionner au moins une réponse.");
-  const q=questions[currentIndex];const corr=Array.isArray(q.answers)?q.answers.slice():[];
-  const eq=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
-  const good=eq(sel.slice().sort((x,y)=>x-y),corr.slice().sort((x,y)=>x-y));
-  allOpt.forEach((o,i)=>{o.style.pointerEvents='none';if(corr.includes(i))o.classList.add("correct");if(o.classList.contains("selected")&&!corr.includes(i))o.classList.add("incorrect");});
-  if(good){score++;document.getElementById("feedback").textContent="✅ Bonne réponse !";document.getElementById("feedback").style.color="#2ecc71";}
-  else{document.getElementById("feedback").textContent="❌ Mauvaise réponse.";document.getElementById("feedback").style.color="#e74c3c";}
-  document.getElementById("validate-btn").style.display="none";
-  document.getElementById("next-btn").style.display="inline-block";
-});
-document.getElementById("next-btn").addEventListener("click",()=>{currentIndex++;if(currentIndex<totalQuestions)showQuestion();else showResult();});
-document.getElementById("stop-btn").addEventListener("click",showResult);
-function showResult(){
-  document.getElementById("question-container").innerHTML="";
-  document.getElementById("validate-btn").style.display="none";
-  document.getElementById("next-btn").style.display="none";
-  document.getElementById("stop-btn").style.display="none";
-  document.getElementById("feedback").textContent="";
-  const success=score>=minScore;
-  const txt=`Score : ${score} / ${totalQuestions}<br>${success?"🎉 Réussi !":"❌ Non validé"}`;
-  document.getElementById("result").innerHTML=txt;
-  const newBtn=document.createElement("button");newBtn.textContent="🔁 Nouveau quiz";newBtn.className="blue-btn";
-  newBtn.onclick=()=>{document.getElementById("result").innerHTML="";loadQuestions(currentFile);};
-  const homeBtn=document.createElement("button");homeBtn.textContent="🏠 Accueil";homeBtn.id="home-btn";homeBtn.onclick=()=>location.reload();
-  document.getElementById("result").appendChild(document.createElement("br"));
-  document.getElementById("result").appendChild(newBtn);
-  document.getElementById("result").appendChild(document.createTextNode(" "));
-  document.getElementById("result").appendChild(homeBtn);
-}
-</script>
+  <header>
+    <img src="logo.png" alt="Logo" />
+    <h1>Quiz d'entraînement Certiphyto</h1>
+  </header>
+
+  <main id="home">
+    <h2>Choisissez votre catégorie de quiz</h2>
+    <div id="categoryButtons"></div>
+  </main>
+
+  <main id="quiz-container">
+    <div id="question-container">
+      <div id="question"></div>
+      <div id="options"></div>
+    </div>
+    <div id="controls">
+      <button class="btn" id="validate-btn">Valider</button>
+      <button class="btn" id="next-btn" style="display:none;">Question suivante</button>
+      <button class="btn" id="stop-btn">Arrêter le quiz</button>
+    </div>
+    <div id="result"></div>
+  </main>
+
+  <script>
+    const quizFiles = {
+      "DENSA": { file: "questions-densa-ea.json", title: "Décideur en entreprise non soumise à agrément - Exploitation agricole" },
+      "DENSA COL": { file: "questions-densa-col.json", title: "Décideur en entreprise non soumise à agrément - Collectivité" },
+      "DESA": { file: "questions-desa.json", title: "Décideur en entreprise soumise à agrément - Prestation de services du secteur agricole et forestier" },
+      "OPÉRATEUR": { file: "questions-operateur-ea.json", title: "Opérateur - Exploitation agricole" },
+      "OPÉRATEUR COL": { file: "questions-operateur-col.json", title: "Opérateur - Collectivité" }
+    };
+
+    let currentQuiz = [];
+    let currentIndex = 0;
+    let score = 0;
+    let categoryTitle = "";
+    let totalQuestions = 30;
+    let passScore = 15;
+
+    async function checkQuizFiles() {
+      const container = document.getElementById("categoryButtons");
+      container.innerHTML = "";
+
+      for (const [key, data] of Object.entries(quizFiles)) {
+        try {
+          const res = await fetch(data.file + "?v=" + Date.now());
+          if (!res.ok) throw new Error();
+          const json = await res.json();
+          const count = json.length;
+
+          const btn = document.createElement("button");
+          btn.textContent = `${key} (${count} questions)`;
+          btn.onclick = () => startQuiz(data.file, data.title, key);
+          btn.className = "category-btn ready";
+
+          container.appendChild(btn);
+        } catch {
+          const btn = document.createElement("button");
+          btn.textContent = `${key} (🚧 en cours)`;
+          btn.disabled = true;
+          btn.className = "category-btn pending";
+          container.appendChild(btn);
+        }
+      }
+    }
+
+    async function startQuiz(file, title, key) {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("quiz-container").style.display = "block";
+
+      categoryTitle = title;
+      document.querySelector("header h1").textContent = title;
+
+      // Paramètres selon la catégorie
+      if (key.includes("OPÉRATEUR")) { totalQuestions = 20; passScore = 12; }
+      else if (key.includes("DESA")) { totalQuestions = 30; passScore = 20; }
+      else { totalQuestions = 30; passScore = 15; }
+
+      const res = await fetch(file + "?v=" + Date.now());
+      currentQuiz = await res.json();
+
+      // Tirage aléatoire
+      currentQuiz = currentQuiz.sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
+
+      currentIndex = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = currentQuiz[currentIndex];
+      document.getElementById("question").textContent = `Question ${currentIndex + 1}/${totalQuestions} : ${q.q}`;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      q.options.forEach((opt, i) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.textContent = opt;
+        div.onclick = () => div.classList.toggle("selected");
+        optionsDiv.appendChild(div);
+      });
+
+      document.getElementById("validate-btn").style.display = "inline-block";
+      document.getElementById("next-btn").style.display = "none";
+      document.getElementById("result").textContent = "";
+    }
+
+    document.getElementById("validate-btn").addEventListener("click", () => {
+      const q = currentQuiz[currentIndex];
+      const selected = Array.from(document.querySelectorAll(".option.selected")).map(o => [...o.parentNode.children].indexOf(o));
+      const correct = q.answers;
+
+      const options = document.querySelectorAll(".option");
+      options.forEach((opt, i) => {
+        if (correct.includes(i)) opt.classList.add("correct");
+        else if (selected.includes(i)) opt.classList.add("incorrect");
+        opt.onclick = null;
+      });
+
+      if (arraysEqual(selected.sort(), correct.sort())) score++;
+
+      document.getElementById("validate-btn").style.display = "none";
+      document.getElementById("next-btn").style.display = "inline-block";
+    });
+
+    document.getElementById("next-btn").addEventListener("click", () => {
+      currentIndex++;
+      if (currentIndex < totalQuestions) showQuestion();
+      else endQuiz();
+    });
+
+    document.getElementById("stop-btn").addEventListener("click", endQuiz);
+
+    function arraysEqual(a, b) {
+      return a.length === b.length && a.every((v, i) => v === b[i]);
+    }
+
+    function endQuiz() {
+      document.getElementById("question-container").style.display = "none";
+      document.getElementById("controls").style.display = "none";
+      const resultDiv = document.getElementById("result");
+      const success = score >= passScore;
+      resultDiv.innerHTML = `
+        <p>Score final : ${score}/${totalQuestions}</p>
+        <p style="color:${success ? 'green' : 'red'};">
+          ${success ? "✅ Réussi" : "❌ Échoué"}
+        </p>
+        <button class="btn" id="restart-btn">Nouveau quiz</button>
+        <button class="btn" id="home-btn">Accueil</button>
+      `;
+
+      document.getElementById("restart-btn").onclick = () => startQuiz(Object.values(quizFiles).find(q => q.title === categoryTitle).file, categoryTitle, categoryTitle);
+      document.getElementById("home-btn").onclick = goHome;
+    }
+
+    function goHome() {
+      document.getElementById("quiz-container").style.display = "none";
+      document.getElementById("home").style.display = "block";
+      document.querySelector("header h1").textContent = "Quiz d'entraînement Certiphyto";
+      document.getElementById("question-container").style.display = "block";
+      document.getElementById("controls").style.display = "block";
+      checkQuizFiles();
+    }
+
+    document.addEventListener("DOMContentLoaded", checkQuizFiles);
+  </script>
 </body>
 </html>
