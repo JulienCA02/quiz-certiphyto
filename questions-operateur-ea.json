@@ -772,9 +772,10 @@
   },
   {
     "id": 62,
-    "q": "Je traite avec un produit phytopharmaceutique classé H373, je peux le mélanger avec un produit phytopharmaceutique classé H360D",
+    "q": "Je traite avec un produit phytopharmaceutique classé H373, je peux le mélanger avec ",
     "options": [
-      "un produit phytopharmaceutique classé H351",
+      "un produit phytopharmaceutique classé H360D",
+	  "un produit phytopharmaceutique classé H351",
       "un produit phytopharmaceutique classé H411",
       "Aucun  produits autres phytopharmaceutiques"
     ],
@@ -2674,9 +2675,10 @@
   },
   {
     "id": 216,
-    "q": "Quelle quantité maximale de produits phytopharmaceutiques peut-on transporter à l'aide d'un tracteur agricole équipé d'une remorque plateau ? Aucune, c'est interdit",
+    "q": "Quelle quantité maximale de produits phytopharmaceutiques peut-on transporter à l'aide d'un tracteur agricole équipé d'une remorque plateau ?",
     "options": [
-      "50 kg si les produits sont conditionnés dans des bidons d'une contenance inférieure ou égale à 20 litres",
+      "Aucune, c'est interdit",
+	  "50 kg si les produits sont conditionnés dans des bidons d'une contenance inférieure ou égale à 20 litres",
       "1 t si les produits sont conditionnés dans des bidons d'une contenance inférieure ou égale à 20 litres"
     ],
     "answers": [
@@ -2723,7 +2725,7 @@
   },
   {
     "id": 220,
-    "q": "Quelles précautions puis-je prendre pour gérer les bidons vides de produits phytopharmaceutiques?",
+    "q": "Quelles précautions puis-je prendre pour gérer les bidons vides de produits phytopharmaceutiques ?",
     "options": [
       "Les rincer 3 fois",
       "Les brûler",
@@ -2852,9 +2854,10 @@
   },
   {
     "id": 230,
-    "q": "Quelles sont les méthodes possibles en cas de buse bouchée lors d'un traitement ? S'arrêter, descendre du tracteur et démonter la buse pour souffler à la bouche dedans",
+    "q": "Quelles sont les méthodes possibles en cas de buse bouchée lors d'un traitement ?",
     "options": [
-      "S'arrêter, descendre du tracteur sans ses EPI et remplacer la buse",
+      "S'arrêter, descendre du tracteur et démonter la buse pour souffler à la bouche dedans",
+	  "S'arrêter, descendre du tracteur sans ses EPI et remplacer la buse",
       "Avancer de 5 m, descendre du tracteur avec ses EPI et brosser la buse avec une brosse réservée à cet usage",
       "Avancer de 5 m, descendre du tracteur avec ses EPI et remplacer la buse"
     ],
@@ -2993,7 +2996,7 @@
   },
   {
     "id": 241,
-    "q": "Quels produits sont utilisables en traitement en Agriculture Biologique?",
+    "q": "Quels produits sont utilisables en traitement en Agriculture Biologique ?",
     "options": [
       "Le cuivre",
       "Un insecticide ‘biodégradable’",
@@ -3243,7 +3246,7 @@
   },
   {
     "id": 261,
-    "q": "Qui dois-je contacter en premier en cas de malaise lié à une inhalation de produits phytopharmaceutiques?",
+    "q": "Qui dois-je contacter en premier en cas de malaise lié à une inhalation de produits phytopharmaceutiques ?",
     "options": [
       "Mon supérieur hiérarchique",
       "Phyt'attitude",
@@ -3306,9 +3309,10 @@
   },
   {
     "id": 266,
-    "q": "Sont considérés comme effluents phytopharmaceutiques : Les eaux de lavage du matériel de pulvérisation, dont le rinçage extérieur",
+    "q": "Sont considérés comme effluents phytopharmaceutiques :",
     "options": [
-      "Un EVPP",
+      "Les eaux de lavage du matériel de pulvérisation, dont le rinçage extérieur",
+	  "Un EVPP",
       "Les bouillies phytopharmaceutiques non utilisables"
     ],
     "answers": [
@@ -3678,9 +3682,10 @@
   },
   {
     "id": 296,
-    "q": "Vous avez renversé accidentellement un produit phytopharmaceutique liquide dans un local à sol cimenté, quelle intervention proposez-vous ? Répandre un produit d’inertage au sol (sciure, litière, kit d’absorption …)",
+    "q": "Vous avez renversé accidentellement un produit phytopharmaceutique liquide dans un local à sol cimenté, quelle intervention proposez-vous ?",
     "options": [
-      "Laver à grande eau",
+      "Répandre un produit d’inertage au sol (sciure, litière, kit d’absorption …)",
+	  "Laver à grande eau",
       "Éponger avec une serpillière"
     ],
     "answers": [
@@ -3739,9 +3744,10 @@
   },
   {
     "id": 301,
-    "q": "Vous devez réaliser un mélange de deux produits phytopharmaceutiques, quelles questions devez-vous vous poser afin de savoir si ce mélange est autorisé ? Est-ce que l'un des produits est classé Cancérigène, Mutagène ou Reprotoxique (CMR) ?",
+    "q": "Vous devez réaliser un mélange de deux produits phytopharmaceutiques, quelles questions devez-vous vous poser afin de savoir si ce mélange est autorisé ?",
     "options": [
-      "Est-ce que les deux produits ont le même mode d'action ?",
+      "Est-ce que l'un des produits est classé Cancérigène, Mutagène ou Reprotoxique (CMR) ?",
+	  "Est-ce que les deux produits ont le même mode d'action ?",
       "Est-ce que l'un des produits a une Zone Non Traitée (ZNT) de 50 mètres ?"
     ],
     "answers": [
@@ -3750,9 +3756,10 @@
   },
   {
     "id": 302,
-    "q": "Vous développez une réaction cutanée à la suite de l'application d'un traitement phytosanitaire, que faites-vous ? Rien, demain ça ira mieux",
+    "q": "Vous développez une réaction cutanée à la suite de l'application d'un traitement phytosanitaire, que faites-vous ?",
     "options": [
-      "J'appelle le numéro vert de Phyt'attitude         0 800 887 887",
+      "Rien, demain ça ira mieux",
+	  "J'appelle le numéro vert de Phyt'attitude 0 800 887 887",
       "J'appelle le centre-antipoison"
     ],
     "answers": [
@@ -3762,9 +3769,10 @@
   },
   {
     "id": 303,
-    "q": "Vous développez une réaction cutanée à la suite de l'application d'un traitement phytosanitaire, que faites-vous ? Rien, demain ça ira mieux",
+    "q": "Vous développez une réaction cutanée à la suite de l'application d'un traitement phytosanitaire, que faites-vous ?",
     "options": [
-      "J'appelle mon médecin traitant",
+      "Rien, demain ça ira mieux",
+	  "J'appelle mon médecin traitant",
       "Je préviens le  service de Santé au Travail"
     ],
     "answers": [
@@ -3778,7 +3786,7 @@
     "options": [
       "J'appelle mon médecin traitant",
       "Je prends un comprimé contre l'allergie",
-      "J'appelle le numéro vert de Phyt'attitude         0 800 887 887"
+      "J'appelle le numéro vert de Phyt'attitude 0 800 887 887"
     ],
     "answers": [
       0,
@@ -3801,9 +3809,8 @@
   },
   {
     "id": 306,
-    "q": "Vous utilisez une spécialité commerciale contenant du bacille de Thuringe, autorisée en agriculture biologique, avec la mention de danger H317",
+    "q": "Vous utilisez une spécialité commerciale contenant du bacille de Thuringe, autorisée en agriculture biologique, avec la mention de danger H317 (Peut provoquer une allergie cutanée) :",
     "options": [
-      "(Peut provoquer une allergie cutanée) :",
       "Vous êtes tenu de respecter 48h de délai de rentrée",
       "Vous êtes tenu de respecter 24h de délai de rentrée",
       "Vous êtes tenu de respecter 6h de délai de rentrée",
